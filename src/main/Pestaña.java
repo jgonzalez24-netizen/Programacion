@@ -17,7 +17,7 @@ public class Pestaña extends JFrame {
     public Pestaña() {
 
         setTitle("Sistema");
-        setSize(900, 500);
+        setSize(1200, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -31,7 +31,7 @@ public class Pestaña extends JFrame {
        // login();
        // registro();
         
-        calculadora();  
+        calculadora_layout();  
 
         setVisible(true);
     }
@@ -387,4 +387,64 @@ public class Pestaña extends JFrame {
     	        }
     	    }
     	}
+
+    	
+    	
+
+    	public void calculadora_layout() {
+
+    	    JPanel panel_users = new JPanel();
+    	    panel_users.setSize(500, 600);
+    	    panel_users.setLocation(250, 50);
+    	    panel_users.setBackground(Color.black);
+
+    	    BorderLayout mi_layout1 = new BorderLayout();
+    	    mi_layout1.setVgap(20);
+
+    	    panel_users.setLayout(mi_layout1);
+    	    this.add(panel_users);
+
+    	    JLabel field = new JLabel("180.00");
+    	    field.setOpaque(true);
+    	    field.setBackground(Color.white);
+    	    field.setFont(new Font("Arial", Font.BOLD, 22));
+    	    field.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+    	    panel_users.add(field, BorderLayout.NORTH);
+
+    	    JPanel centro = new JPanel();
+    	    centro.setBackground(Color.white);
+    	    centro.setLayout(new GridLayout(4,4,10,10));
+    	    panel_users.add(centro, BorderLayout.CENTER);
+
+    	    String botones[] = {
+    	        "7","8","9","/",
+    	        "4","5","6","*",
+    	        "1","2","3","-",
+    	        "0",".","=","+"
+    	    };
+
+    	    for (int i = 0; i < botones.length; i++) {
+    	        JButton ce = new JButton(botones[i]);
+    	        ce.setSize(100, 100);
+    	        centro.add(ce);
+    	    }
+    	    JPanel sidebar = new JPanel();
+    	    sidebar.setBackground(Color.gray);
+    	    sidebar.setLayout(new GridLayout(6,1,10,10));
+    	    panel_users.add(sidebar, BorderLayout.EAST);
+
+    	    String [] botones2 = {"+","-","*","/","=","CE"};
+
+    	    for (int i = 0; i < botones2.length; i++) {
+
+    	        JButton ce = new JButton(botones2[i]);
+    	        ce.setSize(100, 100);
+    	        ce.setFont(new Font("Arial", Font.BOLD, 22));
+    	        sidebar.add(ce);
+
+    	    }
+    	
+	
+}
+
 }
