@@ -30,8 +30,9 @@ public class Pestaña extends JFrame {
         }
        // login();
        // registro();
+       // calculadora_layout();  
+        intereses();
         
-        calculadora_layout();  
 
         setVisible(true);
     }
@@ -446,5 +447,103 @@ public class Pestaña extends JFrame {
     	
 	
 }
+    	public void intereses() {
 
+    	    setLayout(new BorderLayout());
+
+    	    // titulo
+    	    JLabel titulo = new JLabel("Calcular interes");
+    	    titulo.setHorizontalAlignment(JLabel.CENTER);
+    	    add(titulo, BorderLayout.NORTH);
+
+    	    // panel datos
+    	    JPanel datos = new JPanel();
+    	    datos.setBackground(Color.decode("#A8E6A3")); //verde
+    	    datos.setLayout(new GridLayout(4,2));
+    	    datos.setBorder(BorderFactory.createTitledBorder("Calcular interes"));
+
+    	    JLabel capital = new JLabel("Capital:");
+    	    JTextField txtCapital = new JTextField();
+
+    	    JLabel tiempo = new JLabel("Tiempo:");
+    	    JTextField txtTiempo = new JTextField();
+
+    	    JLabel tasa = new JLabel("Tasa interes:");
+    	    JTextField txtTasa = new JTextField();
+
+    	    datos.add(capital);
+    	    datos.add(txtCapital);
+    	    datos.add(tiempo);
+    	    datos.add(txtTiempo);
+    	    datos.add(tasa);
+    	    datos.add(txtTasa);
+
+    	    JPanel botones = new JPanel();
+    	    botones.setLayout(new FlowLayout());
+
+    	    ImageIcon iconCalcular = new ImageIcon(getClass().getResource("/imagen/calculadora.png"));
+    	    Image img1 = iconCalcular.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+    	    iconCalcular = new ImageIcon(img1);
+
+    	    ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagen/boton-x.png"));
+    	    Image img2 = iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+    	    iconCancelar = new ImageIcon(img2);
+
+    	    JButton calcular = new JButton("Calcular", iconCalcular);
+    	    JButton cancelar = new JButton("Cancelar", iconCancelar);
+
+    	    botones.add(calcular);
+    	    botones.add(cancelar);
+
+    	    datos.add(botones);
+
+    	    add(datos, BorderLayout.CENTER);
+
+    	    // panel resultados 
+    	    JPanel resultados = new JPanel();
+    	    resultados.setBackground(new Color(255, 200, 200));  //rosa
+    	    resultados.setLayout(new GridLayout(2,2));
+    	    resultados.setBorder(BorderFactory.createTitledBorder("Resultados"));
+
+    	    JLabel interes = new JLabel("Interes:");
+    	    JTextField txtInteres = new JTextField();
+    	    txtInteres.setEditable(false);
+
+    	    JLabel monto = new JLabel("Monto:");
+    	    JTextField txtMonto = new JTextField();
+    	    txtMonto.setEditable(false);
+
+    	    resultados.add(interes);
+    	    resultados.add(txtInteres);
+    	    resultados.add(monto);
+    	    resultados.add(txtMonto);
+
+    	    add(resultados, BorderLayout.SOUTH);
+    	    //operaciones
+    	    calcular.addActionListener(new ActionListener() {
+    	        public void actionPerformed(ActionEvent e) {
+
+    	            double c = Float.parseFloat(txtCapital.getText());
+    	            double t = Float.parseFloat(txtTiempo.getText());
+    	            double r = Float.parseFloat(txtTasa.getText());
+
+    	            double i = c * r * t;
+    	            double m = c + i;
+
+    	            txtInteres.setText("" + i);
+    	            txtMonto.setText("" + m);
+    	        }
+    	    });
+
+    	    cancelar.addActionListener(new ActionListener() {
+    	        public void actionPerformed(ActionEvent e) {
+
+    	            txtCapital.setText("");
+    	            txtTiempo.setText("");
+    	            txtTasa.setText("");
+    	            txtInteres.setText("");
+    	            txtMonto.setText("");
+    	        }
+    	    });
+    	}
 }
