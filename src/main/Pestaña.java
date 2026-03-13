@@ -1,10 +1,14 @@
 package main;
 
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Graphics;
+import javax.swing.JPanel;
+
 import java.awt.Font;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -31,7 +35,8 @@ public class Pestaña extends JFrame {
        // login();
        // registro();
        // calculadora_layout();  
-        intereses();
+        //intereses();
+        this.pintar();
         
 
         setVisible(true);
@@ -546,4 +551,46 @@ public class Pestaña extends JFrame {
     	        }
     	    });
     	}
+    	public void pintar() {
+    		 JPanel pane = new JPanel() {
+    	            @Override
+    	            protected void paintComponent(Graphics g) {
+    	                super.paintComponent(g);
+    	                Graphics2D g2d = (Graphics2D) g;
+    	                g.drawLine(0, 0, 100, 100);
+    	                g2d.drawLine(0,0,1000,700);
+    	                g2d.setColor(Color.orange);
+    	                g2d.drawOval(100,100,150,50);
+    	                g2d.setStroke(new BasicStroke(1));
+    	                g2d.drawPolygon(new int [] {300,100,500}, new int[] {100,300,300},3);
+    	                g2d.drawRect(250, 300,100,100);
+    	                g2d.drawRoundRect(500,150,100,100,10,10);
+    	                g2d.drawArc(400,100,100,100,0,100);
+    	                g2d.setFont(new Font("Arial",Font.BOLD,22));
+    	                g2d.drawString("Hola",100,100);
+    	                g2d.setColor(Color.black);
+    	                g2d.fillOval(500,50,50,50);
+    	                g2d.fillPolygon(new int []  {500,300,700} , new int [] {300,500,500},3);
+    	                g2d.setColor(Color.orange);
+    	                g2d.fillRoundRect(500,500,100,100,10,10);
+    	                g2d.fillArc(450,150,100,100,0,300);
+    	                
+    	                BufferedImage image;
+						try {
+							image = ImageIO.read(new File("src/imagen/gato.png"));
+							  g2d.drawImage(image, 0, 0, null);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+    	              
+    	                
+    	            }
+    	        };
+    	        pane.setSize(1000,700);
+    	        pane.setLocation(0,0);
+    	        this.add(pane);
+    	       
+}
+    	
 }
