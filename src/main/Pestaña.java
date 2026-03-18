@@ -34,9 +34,9 @@ public class Pestaña extends JFrame {
         }
        // login();
        // registro();
-       // calculadora_layout();  
-        //intereses();
-        this.pintar();
+       //calculadora_layout();  
+       // intereses();
+        pintar();
         
 
         setVisible(true);
@@ -552,45 +552,55 @@ public class Pestaña extends JFrame {
     	    });
     	}
     	public void pintar() {
-    		 JPanel pane = new JPanel() {
-    	            @Override
-    	            protected void paintComponent(Graphics g) {
-    	                super.paintComponent(g);
-    	                Graphics2D g2d = (Graphics2D) g;
-    	                g.drawLine(0, 0, 100, 100);
-    	                g2d.drawLine(0,0,1000,700);
-    	                g2d.setColor(Color.orange);
-    	                g2d.drawOval(100,100,150,50);
-    	                g2d.setStroke(new BasicStroke(1));
-    	                g2d.drawPolygon(new int [] {300,100,500}, new int[] {100,300,300},3);
-    	                g2d.drawRect(250, 300,100,100);
-    	                g2d.drawRoundRect(500,150,100,100,10,10);
-    	                g2d.drawArc(400,100,100,100,0,100);
-    	                g2d.setFont(new Font("Arial",Font.BOLD,22));
-    	                g2d.drawString("Hola",100,100);
-    	                g2d.setColor(Color.black);
-    	                g2d.fillOval(500,50,50,50);
-    	                g2d.fillPolygon(new int []  {500,300,700} , new int [] {300,500,500},3);
-    	                g2d.setColor(Color.orange);
-    	                g2d.fillRoundRect(500,500,100,100,10,10);
-    	                g2d.fillArc(450,150,100,100,0,300);
-    	                
-    	                BufferedImage image;
-						try {
-							image = ImageIO.read(new File("src/imagen/gato.png"));
-							  g2d.drawImage(image, 0, 0, null);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-    	              
-    	                
+
+    	    JPanel pane = new JPanel() {
+    	        @Override
+    	        public void paint(Graphics g) {   // 👈 usamos paint aquí
+    	            super.paint(g);
+    	            Graphics2D g2d = (Graphics2D) g;
+
+    	            //fondo
+    	            g2d.setColor(new Color(173, 216, 230)); // cielo
+    	            g2d.fillRect(0, 0, getWidth(), getHeight());
+
+    	            g2d.setColor(new Color(85, 139, 47)); // pasto
+    	            g2d.fillRect(0, 400, getWidth(), 200);
+
+    	            //casa
+    	            g2d.setColor(new Color(220, 200, 80));
+    	            g2d.fillRect(200, 200, 300, 200);
+
+    	            //techo
+    	            g2d.setColor(Color.RED);
+    	            int[] x = {180, 350, 550};
+    	            int[] y = {200, 100, 200};
+    	            g2d.fillPolygon(x, y, 3);
+
+    	            //puerta
+    	            g2d.setColor(new Color(102, 51, 0));
+    	            g2d.fillRect(250, 280, 80, 120);
+
+    	            g2d.setColor(Color.BLACK);
+    	            g2d.fillOval(310, 330, 10, 10);
+
+    	            //ventana
+    	            g2d.setColor(Color.CYAN);
+    	            g2d.fillRect(380, 250, 80, 80);
+
+    	            g2d.setColor(Color.BLACK);
+    	            g2d.drawLine(420, 250, 420, 330);
+    	            g2d.drawLine(380, 290, 460, 290);
+
+    	            //cerca
+    	            g2d.setColor(new Color(210, 180, 100));
+    	            for (int i = 0; i < getWidth(); i += 40) {
+    	                g2d.fillRect(i, 350, 20, 80);
     	            }
-    	        };
-    	        pane.setSize(1000,700);
-    	        pane.setLocation(0,0);
-    	        this.add(pane);
-    	       
-}
-    	
+    	        }
+    	    };
+
+    	    pane.setSize(1000, 700);
+    	    pane.setLocation(0, 0);
+    	    this.add(pane);
+    	}
 }
