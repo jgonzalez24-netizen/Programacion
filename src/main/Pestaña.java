@@ -122,32 +122,55 @@ public class Pestaña extends JFrame {
 
         ingresar = new JButton("Acceder");
         ingresar.setBounds(140, 240, 120, 35);
-        fondoLabel.add(ingresar);
+        fondoLabel.add(ingresar); 
+    
         
-        ingresar.addActionListener(e -> {
-
+    ingresar.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+            String user = usuario.getText();
+            String pass = new String(password.getPassword());
+            
             boolean valido = true;
             
-            if (usuario.getText().trim().isEmpty() || usuario.getText().contains(" ")) {
+            // Usuario
+            if (user.trim().isEmpty() || user.contains(" ")) {
                 usuario.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                 valido = false;
             } else {
                 usuario.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-                
             }
-            String pass = new String(password.getPassword());
+
+            // Contraseña
             if (pass.length() < 6 || pass.contains(" ")) {
                 password.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                 valido = false;
             } else {
                 password.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
             }
-           
 
+            //mensajes
             if (valido) {
-                JOptionPane.showMessageDialog(null, "Acceso correcto");
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Bienvenido",
+                        "Acceso",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
+            } else {
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Verifica los datos ingresados",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
             }
-        });
+        }
+    });
+    
     }
     public void registro() {
 
