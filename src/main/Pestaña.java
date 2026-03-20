@@ -1,14 +1,11 @@
 package main;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import java.awt.Font;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -36,6 +33,9 @@ public class Pestaña extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
+        // 🔥 MENÚ (AQUÍ ESTÁ LA CLAVE)
+        menu();
+
         try {
             Image iconImage = ImageIO.read(getClass().getResource("/imagen/gato.png"));
             this.setIconImage(iconImage);
@@ -43,7 +43,6 @@ public class Pestaña extends JFrame {
             e.printStackTrace();
         }
 
-        // SOLO router
         this.router("login");
 
         setVisible(true);
@@ -101,44 +100,40 @@ public class Pestaña extends JFrame {
         ingresar = new JButton("Acceder");
         ingresar.setBounds(140, 240, 120, 35);
         fondoLabel.add(ingresar);
-       
+
         JButton registrarse = new JButton("Registrarse");
         registrarse.setBounds(140, 290, 120, 35);
         fondoLabel.add(registrarse);
-        
-        registrarse.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                router("registrarse");
-            }
+
+        registrarse.addActionListener(e -> {
+            router("registrarse");
         });
 
-        ingresar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        ingresar.addActionListener(e -> {
 
-                String user = usuario.getText();
-                String pass = new String(password.getPassword());
+            String user = usuario.getText();
+            String pass = new String(password.getPassword());
 
-                boolean valido = true;
+            boolean valido = true;
 
-                if (user.trim().isEmpty() || user.contains(" ")) {
-                    usuario.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                    valido = false;
-                } else {
-                    usuario.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-                }
+            if (user.trim().isEmpty() || user.contains(" ")) {
+                usuario.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                valido = false;
+            } else {
+                usuario.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+            }
 
-                if (pass.length() < 6 || pass.contains(" ")) {
-                    password.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                    valido = false;
-                } else {
-                    password.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-                }
+            if (pass.length() < 6 || pass.contains(" ")) {
+                password.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                valido = false;
+            } else {
+                password.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+            }
 
-                if (valido) {
-                    JOptionPane.showMessageDialog(null, "Bienvenido");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Verifica los datos");
-                }
+            if (valido) {
+                JOptionPane.showMessageDialog(null, "Bienvenido");
+            } else {
+                JOptionPane.showMessageDialog(null, "Verifica los datos");
             }
         });
     }
@@ -146,7 +141,7 @@ public class Pestaña extends JFrame {
     public void registro() {
 
         JPanel panelRegistro = new JPanel();
-        panelRegistro.setBounds(0, 0, 400, 450); 
+        panelRegistro.setBounds(0, 0, 400, 450);
         panelRegistro.setBackground(new Color(25, 42, 86));
         panelRegistro.setLayout(null);
         this.add(panelRegistro);
@@ -251,7 +246,6 @@ public class Pestaña extends JFrame {
             router("login");
         });
 
-        // ✅ VALIDACIÓN ORIGINAL
         register_btn.addActionListener(e -> {
 
             boolean valido = true;
@@ -294,5 +288,33 @@ public class Pestaña extends JFrame {
             }
         });
     }
-    
+
+    public void menu() {
+
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu archivo = new JMenu("Archivo");
+        JMenu ayuda = new JMenu("Ayuda");
+        JMenu cuenta = new JMenu("Cuenta");
+
+        JMenuItem acceder = new JMenuItem("Acceder");
+        JMenuItem registrar = new JMenuItem("Registrar");
+
+        acceder.addActionListener(e -> {
+            router("login");
+        });
+
+        registrar.addActionListener(e -> {
+            router("registrarse");
+        });
+
+        cuenta.add(acceder);
+        cuenta.add(registrar);
+
+        menuBar.add(archivo);
+        menuBar.add(ayuda);
+        menuBar.add(cuenta);
+
+        setJMenuBar(menuBar);
+    }
 }
