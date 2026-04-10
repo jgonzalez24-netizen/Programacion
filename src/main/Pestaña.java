@@ -342,7 +342,6 @@ public class Pestaña extends JFrame {
         JPanel panel = new JPanel();
         panel.setBounds(0,0,400,450);
         panel.setLayout(null);
-        panel.setBackground(new Color(46, 204, 113));
         this.add(panel);
 
         JLabel titulo = new JLabel(tituloTxt);
