@@ -110,7 +110,7 @@ public class AuthView extends JFrame {
 
         ingresar.addActionListener(e -> controller.login());
     }
-
+    			//registro
     public void registro() {
 
         JPanel panelRegistro = new JPanel();
